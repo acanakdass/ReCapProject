@@ -28,9 +28,9 @@ namespace WebAPI.Controllers
             var result = _carService.GetCarDetails();
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         // GET api/cars/5
@@ -40,35 +40,46 @@ namespace WebAPI.Controllers
             var result = _carService.GetById(carId);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         // GET api/GetByBrandId/5
-        [HttpGet("GetByBrandId/{id}")]
+        [HttpGet("getByBrand/{brandId}")]
         public IActionResult GetByBrandId(int brandId)
         {
             var result = _carService.GetCarsByBrandId(brandId);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         // GET api/GetByColorId/5
-        [HttpGet("GetByColorId/{colorId}")]
+        [HttpGet("GetByColor/{colorId}")]
         public IActionResult GetByColorId(int colorId)
         {
-            var result = _carService.GetCarsByBrandId(colorId);
+            var result = _carService.GetCarsByColorId(colorId);
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
+        // GET api/GetByColorId/5
+        [HttpGet("GetByColorAndBrand")]
+        public IActionResult GetByColorIdAndBrandId(int colorId,int brandId)
+        {
+            var result = _carService.GetCarsByColorIdAndBrandId(colorId, brandId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
         // POST api/cars
         [HttpPost]
@@ -79,7 +90,7 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
 

@@ -23,10 +23,11 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
+            //var result = _rentalService.GetAll();
+            var result = _rentalService.GetAllAsDto();
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
             return BadRequest(result.Message);
         }

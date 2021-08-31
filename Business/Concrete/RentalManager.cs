@@ -5,6 +5,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -31,8 +32,6 @@ namespace Business.Concrete
                 }
                 return new SuccessResult("Aracı kiraladınız");
             }
-            
-
             _rentalDal.Add(rental);
             return new SuccessResult("Marka Eklendi");
         }
@@ -59,6 +58,11 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(),"Tüm kiralamalar Listelendi");
 
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetAllAsDto()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(), "Tüm kiralamalar Listelendi");
         }
     }
 }

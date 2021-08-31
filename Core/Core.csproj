@@ -28,6 +28,20 @@
     <None Remove="Utilities\Helpers\Abstract\" />
     <None Remove="Utilities\Helpers\Concrete\" />
     <None Remove="Microsoft.AspNetCore.Http" />
+    <None Remove="Entities\Concrete\" />
+    <None Remove="Utilities\Security\" />
+    <None Remove="Utilities\Security\Hashing\" />
+    <None Remove="Utilities\Security\Encryption\" />
+    <None Remove="Utilities\Security\JWT\" />
+    <None Remove="Extensions\" />
+    <None Remove="Utilities\IoC\" />
+    <None Remove="DependencyResolvers\" />
+    <None Remove="CrossCuttingConcerns\Caching\" />
+    <None Remove="CrossCuttingConcerns\Caching\Microsoft\" />
+    <None Remove="CrossCuttingConcerns\Caching\Redis\" />
+    <None Remove="Aspects\Autofac\Caching\" />
+    <None Remove="Aspects\Autofac\Transaction\" />
+    <None Remove="Aspects\Autofac\Performance\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataAccess\" />
@@ -47,6 +61,20 @@
     <Folder Include="Utilities\Helpers\" />
     <Folder Include="Utilities\Helpers\Abstract\" />
     <Folder Include="Utilities\Helpers\Concrete\" />
+    <Folder Include="Entities\Concrete\" />
+    <Folder Include="Utilities\Security\" />
+    <Folder Include="Utilities\Security\Hashing\" />
+    <Folder Include="Utilities\Security\Encryption\" />
+    <Folder Include="Utilities\Security\JWT\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Utilities\IoC\" />
+    <Folder Include="DependencyResolvers\" />
+    <Folder Include="CrossCuttingConcerns\Caching\" />
+    <Folder Include="CrossCuttingConcerns\Caching\Microsoft\" />
+    <Folder Include="CrossCuttingConcerns\Caching\Redis\" />
+    <Folder Include="Aspects\Autofac\Caching\" />
+    <Folder Include="Aspects\Autofac\Transaction\" />
+    <Folder Include="Aspects\Autofac\Performance\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.18" />

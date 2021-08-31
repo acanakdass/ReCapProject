@@ -7,8 +7,6 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -24,9 +22,10 @@ namespace WebAPI.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> GetAll()
+        public IActionResult GetAll()
         {
-            return new string[] { "value1", "value2" };
+            var result = _carImageService.GetAll();
+            return Ok(result);
         }
 
         // GET api/values/5
@@ -50,15 +49,25 @@ namespace WebAPI.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IActionResult Put([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
         {
+            var result = _carImageService.Update(file, carImage);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{imageId}")]
+        public IActionResult Delete(int imageId)
         {
+            var result = _carImageService.Delete(imageId);
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result);
         }
     }
 }

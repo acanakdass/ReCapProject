@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.Abstract;
+using Business.Constants;
+using Core.Entities.Concrete;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
-using Entities.Concrete;
 
 namespace Business.Concrete
 {
@@ -20,31 +21,31 @@ namespace Business.Concrete
         public IResult Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult("Kullanıcı Eklendi");
+            return new SuccessResult(Messages.Added);
         }
-
 
         public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(), "Tüm kullanıcılar listelendi");
+            var users =_userDal.GetAll();
+            return new SuccessDataResult<List<User>>(users, Messages.Listed);
         }
 
-        public IDataResult<User> GetById(int userId)
+        public IDataResult<User> GetByMail(string email)
         {
-            var user = _userDal.Get(b => b.Id == userId);
-            return new SuccessDataResult<User>(user, "Kullanıcı listelendi");
+            var user = _userDal.Get(u => u.Email == email);
+            return new SuccessDataResult<User>(user,Messages.Listed);
         }
 
-        public IResult Delete(User user)
+        public IDataResult<User> GetByUsername(string username)
         {
-            _userDal.Delete(user);
-            return new SuccessResult("Kullanıcı silindi");
+            var user = _userDal.Get(u => u.Username==username);
+            return new SuccessDataResult<User>(user, Messages.Listed);
         }
 
-        public IResult Update(User user)
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
         {
-            _userDal.Update(user);
-            return new SuccessResult("Kullanıcı güncellendi");
+            var result = _userDal.GetClaims(user);
+            return new SuccessDataResult<List<OperationClaim>>(result, Messages.Listed);
         }
     }
 }

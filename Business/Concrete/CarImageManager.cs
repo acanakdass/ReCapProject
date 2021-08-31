@@ -25,6 +25,7 @@ namespace Business.Concrete
             _imageHelper = imageHelper;
         }
 
+
         public IResult Add(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfCarImagesCountMaxedOut(carImage.CarId));
@@ -44,14 +45,19 @@ namespace Business.Concrete
             return new ErrorResult(Messages.ImageUploadError);
         }
 
-        public IResult Delete(CarImage carImage)
+        public IResult Delete(int carImageId)
         {
-            throw new NotImplementedException();
-        }
-
-        public IDataResult<CarImage> Get(int id)
-        {
-            throw new NotImplementedException();
+            var carImage = _carImageDal.Get(ci => ci.Id==carImageId);
+            if (carImage!=null)
+            {
+                var deleteResult = _imageHelper.Delete(carImage.ImagePath);
+                if (deleteResult.Success)
+                {
+                    _carImageDal.Delete(carImage);
+                    return new SuccessResult(deleteResult.Message);
+                }
+            }
+            return new ErrorResult("Dosya silinirken bir hata oluştu");
         }
 
         public IDataResult<List<CarImage>> GetAll()
@@ -63,12 +69,30 @@ namespace Business.Concrete
         public IDataResult<List<CarImage>> GetImagesByCarId(int carId)
         {
             var result = _carImageDal.GetAll(ci => ci.CarId == carId);
+            if (result.Count==0)
+            {
+                var defaultCarImageList = new List<CarImage>();
+                var path = _imageHelper.GetDefaultCarImage();
+                var defaultCarImage = new CarImage
+                {
+                    Id = 0,
+                    CarId = carId,
+                    ImagePath = path.Data
+                };
+                defaultCarImageList.Add(defaultCarImage);
+                return new SuccessDataResult<List<CarImage>>(defaultCarImageList,Messages.Listed);
+            }          
             return new SuccessDataResult<List<CarImage>>(result,Messages.Listed);
         }
 
         public IResult Update(IFormFile file, CarImage carImage)
         {
-            throw new NotImplementedException();
+            var result = _imageHelper.Update(file, carImage.ImagePath);
+            if (result.Success)
+            {
+                return new SuccessResult(result.Message);
+            }
+            return new ErrorResult(result.Message);
         }
 
         private IResult CheckIfCarImagesCountMaxedOut(int carId)
@@ -80,5 +104,7 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
+        
+
     }
 }
