@@ -9,7 +9,8 @@ namespace Business.Constants
         public static string NameInvalid = "İsim geçersiz";
         public static string Listed = "Listelendi";
         public static string NotFound = "Bulunamadı";
-        //public static string CheckProductInfos = "Ürün bulunamadı";
-
+        public static string ImageUploaded = "Dosya başarıyla eklendi";
+        public static string ImageUploadError="Dosya yüklenirken bir sorun oluştu";
+        public static string CarImagesCountMaxedOut = "Araçların en fazla 5 adet fotoğrafı olabilir";
     }
 }

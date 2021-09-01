@@ -5,12 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Abstract\" />
     <None Remove="Concrete\" />
     <None Remove="DTOs\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Abstract\" />
     <Folder Include="Concrete\" />
     <Folder Include="DTOs\" />
   </ItemGroup>
