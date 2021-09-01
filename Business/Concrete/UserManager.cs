@@ -20,31 +20,31 @@ namespace Business.Concrete
         public IResult Add(User user)
         {
             _userDal.Add(user);
-            return new SuccessResult("Renk Eklendi");
+            return new SuccessResult("Kullanıcı Eklendi");
         }
 
 
         public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<User>>(_userDal.GetAll(), "Tüm markalar listelendi");
+            return new SuccessDataResult<List<User>>(_userDal.GetAll(), "Tüm kullanıcılar listelendi");
         }
 
         public IDataResult<User> GetById(int userId)
         {
             var user = _userDal.Get(b => b.Id == userId);
-            return new SuccessDataResult<User>(user, "Renk listelendi");
+            return new SuccessDataResult<User>(user, "Kullanıcı listelendi");
         }
 
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
-            return new SuccessResult("Renk silindi");
+            return new SuccessResult("Kullanıcı silindi");
         }
 
         public IResult Update(User user)
         {
             _userDal.Update(user);
-            return new SuccessResult("Renk güncellendi");
+            return new SuccessResult("Kullanıcı güncellendi");
         }
     }
 }

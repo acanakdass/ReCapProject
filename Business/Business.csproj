@@ -8,6 +8,8 @@
     <None Remove="Concrete\" />
     <None Remove="Abstract\" />
     <None Remove="Constants\" />
+    <None Remove="Autofac" />
+    <None Remove="Autofac.Extras.DynamicProxy" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Concrete\" />
@@ -18,5 +20,9 @@
     <ProjectReference Include="..\Entities\Entities.csproj" />
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.2.0" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.0" />
   </ItemGroup>
 </Project>
