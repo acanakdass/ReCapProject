@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
 
-            return BadRequest(createTokenResult.Message);
+            return BadRequest(new ErrorDataResult<UserForLoginDto>(createTokenResult.Message));
         }
 
         [HttpPost("register")]
