@@ -13,6 +13,9 @@
     <None Remove="Utilities\Results\" />
     <None Remove="Utilities\Results\Abstract\" />
     <None Remove="Utilities\Results\Concrete\" />
+    <None Remove="CrossCuttingConcerns\" />
+    <None Remove="CrossCuttingConcerns\Validation\" />
+    <None Remove="FluentValidation" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataAccess\" />
@@ -22,8 +25,11 @@
     <Folder Include="Utilities\Results\" />
     <Folder Include="Utilities\Results\Abstract\" />
     <Folder Include="Utilities\Results\Concrete\" />
+    <Folder Include="CrossCuttingConcerns\" />
+    <Folder Include="CrossCuttingConcerns\Validation\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.18" />
+    <PackageReference Include="FluentValidation" Version="10.3.3" />
   </ItemGroup>
 </Project>

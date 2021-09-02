@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -41,14 +43,10 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.Description.Length >= 2 && car.DailyPrice > 0)
-            {
-                _carDal.Add(car);
-                return new SuccessResult(Messages.Added);
-
-            }
-
-            return new ErrorResult("Ürün ismi 1 karakterden büyük ve günlük fiyat 0'dan büyük olmalıdır.");
+            ValidationTool.Validate(new CarValidator(), car);
+            _carDal.Add(car);
+            return new SuccessResult(Messages.Added);
+            //return new ErrorResult("Ürün ismi 1 karakterden büyük ve günlük fiyat 0'dan büyük olmalıdır.");
         }
 
         public IResult Delete(Car car)
