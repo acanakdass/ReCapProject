@@ -1,0 +1,17 @@
+﻿using System;
+using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
+
+namespace DataAccess.Concrete.EntityFramework
+{
+    public class ReCapContext : DbContext
+    {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=localhost,1433;Database=ReCapDB;User Id=SA;Password=password;");
+        }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+    }
+}
