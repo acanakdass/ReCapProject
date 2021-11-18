@@ -87,8 +87,8 @@ namespace Business.Concrete
          return new SuccessDataResult<List<CarDetailDto>>(cars, Messages.Listed);
       }
 
-      //[CacheRemoveAspect("ICarService.Get")]
-      //[SecuredOperation("product.add,admin")]
+        //[CacheRemoveAspect("ICarService.Get")]
+      [SecuredOperation("superadmin")]
       [ValidationAspect(typeof(CarValidator))]
       public IResult Add(Car car)
       {
@@ -99,15 +99,17 @@ namespace Business.Concrete
          //return new ErrorResult("Ürün ismi 1 karakterden büyük ve günlük fiyat 0'dan büyük olmalıdır.");
       }
 
-      //[CacheRemoveAspect("ICarService.Get")]
-      public IResult Delete(Car car)
+        //[CacheRemoveAspect("ICarService.Get")]
+        [SecuredOperation("superadmin")]
+        public IResult Delete(Car car)
       {
-         _carDal.Delete(car);
+            _carDal.Delete(car);
          return new SuccessResult(Messages.Deleted);
 
       }
 
-      //[CacheRemoveAspect("ICarService.Get")]
+     //[CacheRemoveAspect("ICarService.Get")]
+      [SecuredOperation("superadmin")]
       public IResult Update(Car car)
       {
          _carDal.Update(car);

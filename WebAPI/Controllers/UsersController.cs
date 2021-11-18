@@ -28,26 +28,13 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
-        //// GET api/users/5
-        //[HttpGet("{userId}")]
-        //public IActionResult GetById(int userId)
-        //{
-        //    var result = _userService.GetById(userId);
-        //    if (result.Success)
-        //    {
-        //        return Ok(result.Data);
-        //    }
-        //    return BadRequest(result.Message);
-        //}
-
-        // POST api/users
-        [HttpPost]
-        public IActionResult Post([FromBody] User user)
+        [HttpGet("getCurrentUser")]
+        public IActionResult GetCurrentUser()
         {
-            var result = _userService.Add(user);
+            var result = _userService.GetCurrentUser();
             if (result.Success)
             {
                 return Ok(result);
@@ -55,8 +42,32 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
+        // GET api/users/5
+        [HttpGet("{email}")]
+        public IActionResult GetByMail(string email)
+        {
+            var result = _userService.GetByMail(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
-        //// DELETE api/users/5
+        // POST api/users
+        //[HttpPost]
+        //public IActionResult Post([FromBody] User user)
+        //{
+        //    var result = _userService.Add(user);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result);
+        //    }
+        //    return BadRequest(result.Message);
+        //}
+
+
+        // UPDATE api/users/5
         //[HttpPut("{userId}")]
         //public IActionResult Update([FromBody] User user)
         //{
@@ -69,16 +80,16 @@ namespace WebAPI.Controllers
         //}
 
 
-        //// DELETE api/users/5
-        //[HttpDelete]
-        //public IActionResult Delete([FromBody] User user)
-        //{
-        //    var result = _userService.Delete(user);
-        //    if (result.Success)
-        //    {
-        //        return Ok(result);
-        //    }
-        //    return Ok(result.Message);
-        //}
+        // DELETE api/users/5
+        [HttpDelete]
+        public IActionResult Delete(int userId)
+        {
+            var result = _userService.Delete(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

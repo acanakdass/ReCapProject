@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
@@ -25,7 +26,7 @@ namespace Business.Concrete
             _imageHelper = imageHelper;
         }
 
-
+        [SecuredOperation("superadmin")]
         public IResult Add(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfCarImagesCountMaxedOut(carImage.CarId));
@@ -45,6 +46,7 @@ namespace Business.Concrete
             return new ErrorResult(Messages.ImageUploadError);
         }
 
+        [SecuredOperation("superadmin")]
         public IResult Delete(int carImageId)
         {
             var carImage = _carImageDal.Get(ci => ci.Id==carImageId);
@@ -85,6 +87,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(result,Messages.Listed);
         }
 
+        [SecuredOperation("superadmin")]
         public IResult Update(IFormFile file, CarImage carImage)
         {
             var result = _imageHelper.Update(file, carImage.ImagePath);

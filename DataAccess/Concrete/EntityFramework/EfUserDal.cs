@@ -4,12 +4,21 @@ using Core.DataAccess.EntityFramework;
 using Core.Entities.Concrete;
 using DataAccess.Abstract;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace DataAccess.Concrete.EntityFramework
 {
    public class EfUserDal : EfEntityRepositoryBase<User, ReCapContext>, IUserDal
    {
-      public List<OperationClaim> GetClaims(User user)
+        //private HttpContextAccessor httpContext;
+
+        //public EfUserDal(HttpContextAccessor httpContext)
+        //{
+        //    this.httpContext = httpContext;
+        //}
+
+        public List<OperationClaim> GetClaims(User user)
       {
          using (var context = new ReCapContext())
          {
@@ -19,8 +28,13 @@ namespace DataAccess.Concrete.EntityFramework
                          where userOperationClaim.UserId == user.Id
                          select new OperationClaim { Id = operationClaim.Id, Name = operationClaim.Name };
             return result.ToList();
-
          }
       }
-   }
+
+        //public User GetCurrentUser()
+        //{
+        //    var userId = httpContext.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    return this.Get(u => u.Id.ToString() == userId);
+        //}
+    }
 }

@@ -22,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace WebAPI
 {
@@ -40,6 +41,11 @@ namespace WebAPI
             services.AddControllers();
             services.AddCors();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SOMEP API", Version = "v1" });
+                
+            });
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -57,6 +63,7 @@ namespace WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
+
             services.AddDependencyResolvers(new ICoreModule[] {
             new CoreModule()});
             //ServiceTool.Create(services);
@@ -82,6 +89,12 @@ namespace WebAPI
             app.UseStaticFiles();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger");
+            });
 
             app.UseEndpoints(endpoints =>
             {

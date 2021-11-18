@@ -5,12 +5,13 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, ReCapContext>, IRentalDal
     {
-        public List<RentalDetailDto> GetRentalDetails()
+        public List<RentalDetailDto> GetRentalDetails(Expression<Func<RentalDetailDto, bool>> filter = null)
         {
             using (ReCapContext context = new ReCapContext())
             {
@@ -31,7 +32,14 @@ namespace DataAccess.Concrete.EntityFramework
                                  ReturnDate = (DateTime)r.ReturnDate,
                                  Car=car
                              };
+                if (filter != null)
+                {
+                    return result.Where(filter).ToList();
+                }
+                else
+                {
                 return result.ToList();
+                }
             }
         }
     }

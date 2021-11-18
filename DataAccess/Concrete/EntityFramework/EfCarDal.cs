@@ -55,7 +55,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  ModelYear = c.ModelYear,
                                  CarImagePaths = (from ci in context.CarImages where (c.Id == ci.CarId) select ci.ImagePath).ToList()
                              };
-                    return result.FirstOrDefault();
+                    return result.Where(filter).FirstOrDefault();
             }
         }
     }
