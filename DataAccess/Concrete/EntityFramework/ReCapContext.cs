@@ -9,7 +9,6 @@ namespace DataAccess.Concrete.EntityFramework
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=localhost,1433;Database=ReCapProjectDb;User Id=SA;Password=Acanakdas1*;");
             optionsBuilder.UseNpgsql(@"Server=localhost;Port=5432;Database=ReCapDB;User Id=postgres;Password=acanakdas;Integrated Security=true;Pooling=true;");
         }
         public DbSet<Car> Cars { get; set; }
